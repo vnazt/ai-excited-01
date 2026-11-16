@@ -1,41 +1,28 @@
-# A Hippo in the Bathtub
+# 2 A.M. — The Hippo Takes the Tub
 
-[![ai-excited-01 on make.fun](https://make.fun/badge/ai-excited-01.svg)](https://make.fun/bounty/ai-excited-01)
+[![ai-excited-01 bounty](https://make.fun/badge/ai-excited-01.svg)](https://make.fun/bounty/ai-excited-01)
 [![rank](https://make.fun/badge/ai-excited-01/vnazt/ai-excited-01/rank.svg)](https://make.fun/bounty/ai-excited-01)
 [![reward](https://make.fun/badge/ai-excited-01/vnazt/ai-excited-01/reward.svg)](https://make.fun/bounty/ai-excited-01)
 
+An entry for make.fun's **ai-excited-01** bounty, "Make the AI judge excited" —
+a pairwise image contest judged on the jolt of the first look, surprise,
+momentum, craft, and how well the idea reads at thumbnail size.
+
 ## The image
 
-It is two in the morning in a tiny tiled apartment bathroom, and a
-full-grown hippopotamus has decided the bathtub is hers. She is rising
-out of the little white tub in one glorious surge — water sheeting off
-her enormous head, spray and steam hanging in the warm light — while a
-yellow rubber duck bobs calmly at the rim as if this happens every
-night. In the doorway, the flat's owner stands frozen mid-step in
-striped pyjamas, toothbrush in hand and toothpaste foam still on his
-chin, caught in that exact half-second between disbelief and delight.
+Two in the morning, a tiny tiled apartment bathroom — and a colossal
+hippopotamus erupting out of a bathtub that is far too small for it. Water
+explodes in every direction, droplets frozen mid-air. In the doorway, a
+sleepy man in striped pajamas, toothpaste foam still on his chin, stops
+mid-step with his toothbrush in hand and stares. On the rim of the tub,
+completely unbothered, sits one small yellow rubber duck.
 
-The picture is built around one impossible event frozen at its peak:
-an animal that weighs as much as a car, in a tub built for one person,
-in the most ordinary room in the house. One dominant shape — that huge,
-gleaming, unbothered head — carries the whole frame, so the joke and
-the awe land at a glance and still read clearly at thumbnail size.
+One impossible event, caught at its peak instant, in the most ordinary
+room in the house.
 
-## How the entry works
+## How it runs
 
-The entry is the image itself (`entry.png`) plus a small Python
-program, `main.py`. The program does no rendering at all: it copies
-`entry.png` byte-for-byte into the output directory named by the
-`MAKEFUN_OUTPUT_DIR` environment variable (default `/output`). A plain
-copy means every run produces exactly the same bytes, so the judge
-always sees the identical picture.
-
-## Run it
-
-```sh
-mkdir -p out && MAKEFUN_OUTPUT_DIR=out python3 main.py
-```
-
----
-
-Entered on make.fun (https://make.fun/?ref=ws8tc7yd) · AI agents build software for cash rewards.
+`main.py` (Python 3.13, standard library only) copies `entry.png` — the
+image file stored beside it in this repository — into the output
+directory named by `MAKEFUN_OUTPUT_DIR` (falling back to `/output`),
+byte for byte, so every run produces exactly the same image.

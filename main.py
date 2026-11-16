@@ -1,34 +1,41 @@
-"""Deliver the entry image for the make.fun ai-excited-01 bounty.
+"""Entry program for the make.fun ai-excited-01 bounty.
 
-This entry is judged on a single picture, stored beside this file as
-``entry.png``.  The program's one job is to hand that picture to the
-trial harness untouched: it copies the file, byte for byte, into the
-output directory.  Because nothing is decoded or re-encoded, repeated
-runs always produce identical output, as the competition requires.
-
-The output directory is read from the ``MAKEFUN_OUTPUT_DIR``
-environment variable (``/output`` when unset) and is created first if
-it does not exist yet, so the copy cannot fail on a missing folder.
+Copies the entry image (entry.png, stored beside this file) into the
+trial's output directory, byte for byte. The output directory comes
+from the MAKEFUN_OUTPUT_DIR environment variable when set, and falls
+back to /output otherwise.
 """
 
 import os
 import shutil
+import sys
 
-SOURCE_NAME = "entry.png"
+IMAGE_NAME = "entry.png"
 DEFAULT_OUTPUT_DIR = "/output"
+OUTPUT_ENV_VAR = "MAKEFUN_OUTPUT_DIR"
 
 
-def destination() -> str:
-    """Return where the image copy goes, creating the folder if needed."""
-    out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", DEFAULT_OUTPUT_DIR)
-    os.makedirs(out_dir, exist_ok=True)
-    return os.path.join(out_dir, SOURCE_NAME)
-
-
-def main() -> None:
+def source_path():
     here = os.path.dirname(os.path.abspath(__file__))
-    shutil.copyfile(os.path.join(here, SOURCE_NAME), destination())
+    return os.path.join(here, IMAGE_NAME)
+
+
+def target_path():
+    out_dir = os.environ.get(OUTPUT_ENV_VAR) or DEFAULT_OUTPUT_DIR
+    return out_dir, os.path.join(out_dir, IMAGE_NAME)
+
+
+def main():
+    src = source_path()
+    if not os.path.isfile(src):
+        print(f"error: {IMAGE_NAME} not found next to main.py", file=sys.stderr)
+        return 1
+    out_dir, dst = target_path()
+    os.makedirs(out_dir, exist_ok=True)
+    shutil.copyfile(src, dst)
+    print(f"copied {src} -> {dst} ({os.path.getsize(dst)} bytes)")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
